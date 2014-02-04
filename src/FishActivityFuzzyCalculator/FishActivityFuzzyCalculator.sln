@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishActivityFuzzyCalculator", "FishActivityFuzzyCalculator\FishActivityFuzzyCalculator.csproj", "{DC62EBD0-DA4D-4A54-8BF5-26D3F29E53EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishActivityFuzzyCalculator.Tests", "FishActivityFuzzyCalculator.Tests\FishActivityFuzzyCalculator.Tests.csproj", "{E39DEADC-52D4-4329-A201-240AC87AB934}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldWeatherOnline", "WorldWeatherOnline\WorldWeatherOnline.csproj", "{FB0FEE1F-C5EB-4984-89AE-5C67BE36189E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldWeatherOnline.Tests", "WorldWeatherOnline.Tests\WorldWeatherOnline.Tests.csproj", "{E65CE21F-7E10-4518-921A-37224D2A000F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWeatherMap", "OpenWeatherMap\OpenWeatherMap.csproj", "{937D0B6A-15DE-4929-81E9-51EF884D34A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWeatherMap.Tests", "OpenWeatherMap.Tests\OpenWeatherMap.Tests.csproj", "{9F1D864A-7286-4F15-A34C-84AE0E93E27C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utilities", "Common.Utilities\Common.Utilities.csproj", "{6575C311-E9BB-44A4-979D-04CD359605B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC62EBD0-DA4D-4A54-8BF5-26D3F29E53EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC62EBD0-DA4D-4A54-8BF5-26D3F29E53EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC62EBD0-DA4D-4A54-8BF5-26D3F29E53EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC62EBD0-DA4D-4A54-8BF5-26D3F29E53EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E39DEADC-52D4-4329-A201-240AC87AB934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E39DEADC-52D4-4329-A201-240AC87AB934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E39DEADC-52D4-4329-A201-240AC87AB934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E39DEADC-52D4-4329-A201-240AC87AB934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB0FEE1F-C5EB-4984-89AE-5C67BE36189E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0FEE1F-C5EB-4984-89AE-5C67BE36189E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0FEE1F-C5EB-4984-89AE-5C67BE36189E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0FEE1F-C5EB-4984-89AE-5C67BE36189E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E65CE21F-7E10-4518-921A-37224D2A000F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E65CE21F-7E10-4518-921A-37224D2A000F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E65CE21F-7E10-4518-921A-37224D2A000F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E65CE21F-7E10-4518-921A-37224D2A000F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937D0B6A-15DE-4929-81E9-51EF884D34A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937D0B6A-15DE-4929-81E9-51EF884D34A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937D0B6A-15DE-4929-81E9-51EF884D34A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937D0B6A-15DE-4929-81E9-51EF884D34A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1D864A-7286-4F15-A34C-84AE0E93E27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1D864A-7286-4F15-A34C-84AE0E93E27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1D864A-7286-4F15-A34C-84AE0E93E27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1D864A-7286-4F15-A34C-84AE0E93E27C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6575C311-E9BB-44A4-979D-04CD359605B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6575C311-E9BB-44A4-979D-04CD359605B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6575C311-E9BB-44A4-979D-04CD359605B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6575C311-E9BB-44A4-979D-04CD359605B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal
