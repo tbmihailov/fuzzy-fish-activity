@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
@@ -48,7 +51,6 @@
     <Content Include="Free\MarineWeather.cs" />
     <Content Include="Free\TimeZone.cs" />
     <Compile Include="DownloadHelpers.cs" />
-    <Compile Include="PastWeather.cs" />
     <Compile Include="Premium\LocalWeather.cs" />
     <Compile Include="Premium\LocationSearch.cs" />
     <Compile Include="Premium\MarineWeather.cs" />

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC62EBD0-DA4D-4A54-8BF5-26D3F29E53EE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{A0A70695-A14D-4297-98F5-5F8DD8515652}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FishActivityFuzzyCalculator</RootNamespace>
-    <AssemblyName>FishActivityFuzzyCalculator</AssemblyName>
+    <RootNamespace>FishingAdvisor</RootNamespace>
+    <AssemblyName>FishingAdvisor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,14 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsvHelper">
-      <HintPath>..\packages\CsvHelper.2.4.0\lib\net40-client\CsvHelper.dll</HintPath>
+    <Reference Include="FuzzyFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\FuzzyFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="FuzzyFramework.Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\FuzzyFramework.Graphics.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    <Reference Include="PolyLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\PolyLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,26 +50,54 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CatchItem.cs" />
-    <Compile Include="FishMoonPhaseCatch.cs" />
-    <Compile Include="FuzzyCatchItem.cs" />
-    <Compile Include="OpenWeatherMapClient.cs" />
-    <Compile Include="OpenWeatherMapHistoryModels.cs" />
+    <Compile Include="Evaluator.cs" />
+    <Compile Include="FishingActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FishingActivity.designer.cs">
+      <DependentUpon>FishingActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoonPhase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FishingActivity.resx">
+      <DependentUpon>FishingActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Res\Catches-2008-2013.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Res\Sozopol_Weather.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libs\FuzzyFramework.dll" />
+    <Content Include="Libs\FuzzyFramework.Graphics.dll" />
+    <Content Include="Libs\FuzzyFramework.Graphics.pdb" />
+    <Content Include="Libs\FuzzyFramework.pdb" />
+    <Content Include="Libs\PolyLib.dll" />
+    <Content Include="Libs\PolyLib.pdb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Utilities\Common.Utilities.csproj">

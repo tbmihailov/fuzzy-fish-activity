@@ -26,6 +26,12 @@ namespace MoonUtils
             return moonPhase;
         }
 
+        public static MoonPhase GetMoonPhaseEnum(DateTime value)
+        {
+            int moonPhase = GetMoonPhase(value.Year, value.Month, value.Day);
+            return (MoonPhase)moonPhase;
+        }
+
        
 
         public static string ToMoonPhaseString(this MoonPhase phase)
@@ -74,8 +80,6 @@ namespace MoonUtils
         /// <returns></returns>
         public static int GetMoonPhase(int y, int m, int d)
         {
-
-
             int c, e;
             double jd;
             int b;

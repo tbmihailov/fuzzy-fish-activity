@@ -10,7 +10,6 @@ using premium.timezone;
 using premium.marineweather;
 using premium.pastweather;
 using RestSharp;
-using WorldWeatherOnline.Models;
 
 /// <summary>
 /// Summary description for PremiumAPI
@@ -28,7 +27,6 @@ public class PremiumAPI
 
     public PremiumAPI(string apiKey)
     {
-        // TODO: Complete member initialization
         this.PremiumAPIKey = apiKey;
     }
 
@@ -84,7 +82,7 @@ public class PremiumAPI
         return response.Data;
     }
 
-    public RootObject GetPastWeather(PastWeatherInput input)
+    public PastWeather GetPastWeather(PastWeatherInput input)
     {
         // create URL based on input paramters
         string apiURL = ApiBaseURL + "past-weather.ashx?q=" + input.query + "&format=" + input.format + "&extra=" + input.extra + "&enddate=" + input.enddate + "&date=" + input.date + "&includelocation=" + input.includelocation + "&tp=" + input.tp + "&callback=" + input.callback + "&key=" + PremiumAPIKey;
@@ -93,7 +91,7 @@ public class PremiumAPI
         RestRequest request;
         PrepareRequest(apiURL, out client, out request);
 
-        var response = client.Execute<RootObject>(request);
+        var response = client.Execute<PastWeather>(request);
         return response.Data;
     }
 

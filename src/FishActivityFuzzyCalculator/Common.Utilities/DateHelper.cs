@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,27 @@ namespace Common.Helpers
             return dt;
         }
 
-        
+        private static string[] formats = new string[]
+    {
+        "HH:mm tt",
+        "HH:mm",
+        "H:mm tt",
+        "H:mm",
+        "hh:mm tt",
+        "hh:mm",
+        "h:mm tt",
+        "h:mm"
+    };
+
+        public static DateTime ParseDate(string input)
+        {
+            return DateTime.ParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+        }
+
+        public static TimeSpan ParseTimeSpan(string input)
+        {
+            return TimeSpan.ParseExact(input, formats, CultureInfo.InvariantCulture,TimeSpanStyles.None);
+        }
 
     }
 }

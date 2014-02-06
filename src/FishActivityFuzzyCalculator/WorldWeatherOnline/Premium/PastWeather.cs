@@ -18,36 +18,6 @@ namespace premium.pastweather
         public string tp { get; set; }
     }
 
-    public class PastWeather
-    {
-        public Data data;
-    }
-
-    public class Data
-    {
-        public List<Current_Condition> current_condition;
-        public List<Request> request;
-        public List<Weather> weather;
-    }
-
-    public class Current_Condition
-    {
-        public DateTime observation_time { get; set; }
-        public DateTime pastObsDateTime { get; set; }
-        public int temp_C { get; set; }
-        public int windspeedMiles { get; set; }
-        public int windspeedKmph { get; set; }
-        public int winddirDegree { get; set; }
-        public string winddir16Point { get; set; }
-        public string weatherCode { get; set; }
-        public List<WeatherDesc> weatherDesc { get; set; }
-        public List<WeatherIconUrl> weatherIconUrl { get; set; }
-        public float precipMM { get; set; }
-        public float humidity { get; set; }
-        public int visibility { get; set; }
-        public int pressure { get; set; }
-        public int cloudcover { get; set; }
-    }
 
     public class Request
     {
@@ -55,38 +25,12 @@ namespace premium.pastweather
         public string type { get; set; }
     }
 
-    public class Weather
+    public class Astronomy
     {
-        public List<Hourly> hourly { get; set; }
-        public DateTime date { get; set; }
-        public int maxtempC { get; set; }
-        public int maxtempF { get; set; }
-        public int mintempC { get; set; }
-        public int mintempF { get; set; }
-    }
-
-    public class Hourly
-    {
-        public string time { get; set; }
-        public int tempC { get; set; }
-        public int tempF { get; set; }
-        public int windspeedMiles { get; set; }
-        public int windspeedKmph { get; set; }
-        public int windspeedKnots { get; set; }
-        public int windspeedMeterSec { get; set; }
-        public int winddirDegree { get; set; }
-        public string winddir16Point { get; set; }
-        public int weatherCode { get; set; }
-        public List<WeatherDesc> weatherDesc { get; set; }
-        public List<WeatherIconUrl> weatherIconUrl { get; set; }
-        public float precipMM { get; set; }
-        public float precipInches { get; set; }
-        public float humidity { get; set; }
-        public int visibility { get; set; }
-        public int visibilityMiles { get; set; }
-        public int pressure { get; set; }
-        public float pressureInches { get; set; }
-        public int cloudcover { get; set; }
+        public string moonrise { get; set; }
+        public string moonset { get; set; }
+        public string sunrise { get; set; }
+        public string sunset { get; set; }
     }
 
     public class WeatherDesc
@@ -97,5 +41,56 @@ namespace premium.pastweather
     public class WeatherIconUrl
     {
         public string value { get; set; }
+    }
+
+    public class Hourly
+    {
+        public string cloudcover { get; set; }
+        public string DewPointC { get; set; }
+        public string DewPointF { get; set; }
+        public string FeelsLikeC { get; set; }
+        public string FeelsLikeF { get; set; }
+        public string HeatIndexC { get; set; }
+        public string HeatIndexF { get; set; }
+        public string humidity { get; set; }
+        public string precipMM { get; set; }
+        public string pressure { get; set; }
+        public string tempC { get; set; }
+        public string tempF { get; set; }
+        public string time { get; set; }
+        public string visibility { get; set; }
+        public string weatherCode { get; set; }
+        public List<WeatherDesc> weatherDesc { get; set; }
+        public List<WeatherIconUrl> weatherIconUrl { get; set; }
+        public string WindChillC { get; set; }
+        public string WindChillF { get; set; }
+        public string winddir16Point { get; set; }
+        public string winddirDegree { get; set; }
+        public string WindGustKmph { get; set; }
+        public string WindGustMiles { get; set; }
+        public string windspeedKmph { get; set; }
+        public string windspeedMiles { get; set; }
+    }
+
+    public class Weather
+    {
+        public List<Astronomy> astronomy { get; set; }
+        public string date { get; set; }
+        public List<Hourly> hourly { get; set; }
+        public string maxtempC { get; set; }
+        public string maxtempF { get; set; }
+        public string mintempC { get; set; }
+        public string mintempF { get; set; }
+    }
+
+    public class Data
+    {
+        public List<Request> request { get; set; }
+        public List<Weather> weather { get; set; }
+    }
+
+    public class PastWeather
+    {
+        public Data data { get; set; }
     }
 }
