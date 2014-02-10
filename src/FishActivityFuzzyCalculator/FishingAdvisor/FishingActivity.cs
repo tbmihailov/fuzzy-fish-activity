@@ -82,6 +82,7 @@ namespace FishingAdvisor
 
         //for action
         public static ContinuousSet lowActivity;
+        public static ContinuousSet mediumActivity;
         public static ContinuousSet highActivity;
 
         #endregion
@@ -89,7 +90,7 @@ namespace FishingAdvisor
         #region Internal properties
         protected string _expression = null;
         protected FuzzyRelation _relation;
-        protected DefuzzificationFactory.DefuzzificationMethod _defuzzMethod = DefuzzificationFactory.DefuzzificationMethod.CenterOfMaximum;
+        protected DefuzzificationFactory.DefuzzificationMethod _defuzzMethod = DefuzzificationFactory.DefuzzificationMethod.CenterOfGravity;
         protected Defuzzification _defuzzification;
         protected bool _ready = false;
         protected bool _waitingForBuild = false;
@@ -114,7 +115,7 @@ namespace FishingAdvisor
             //WEATHER
             //for temp:
             int minTemp = -30;
-            int avgTemp = 30;
+            int avgTemp = 3;
             int maxTemp = +45;
             BuildTemperatureSets(minTemp, avgTemp, maxTemp);
 
@@ -137,19 +138,27 @@ namespace FishingAdvisor
 
         protected void buildActivitySets()
         {
-            fishActivity = new ContinuousDimension("FishActivity", "Low to High", "", 0, 10);
+            //0-10
+            //fishActivity = new ContinuousDimension("FishActivity", "Low to High", "", 0, 10);
 
-            lowActivity = new RightQuadraticSet(fishActivity, "Low activity", 0, 3, 8);
-            highActivity = new LeftQuadraticSet(fishActivity, "High activity", 2, 7, 10);
+            //lowActivity = new RightQuadraticSet(fishActivity, "Low activity", 0, 3, 8);
+            //highActivity = new LeftQuadraticSet(fishActivity, "High activity", 0, 6, 10);
+
+            fishActivity = new ContinuousDimension("FishActivity", "Low to High", "", -10, 10);
+
+            lowActivity = new RightQuadraticSet(fishActivity, "Low activity", -10, -5, 5);
+            highActivity = new LeftQuadraticSet(fishActivity, "High activity", -5, 5, 10);
+
+            mediumActivity = new BellSet(fishActivity, "Medium activity", 0, 3, 5);
 
             DrawFuzzySetToPictureBox(lowActivity, pictureBoxLowActivity);
             DrawFuzzySetToPictureBox(highActivity, pictureBoxHighActivity);
+            DrawFuzzySetToPictureBox(mediumActivity, pictureBoxMediumActivity);
         }
 
 
         private void BuildMoonSunPeakSets(string sunrise, string sunset, string moonrise, string moonset)
         {
-
             var sunriseTime = DateHelper.ParseDate(sunrise).TimeOfDay;
             var sunsetTime = DateHelper.ParseDate(sunset).TimeOfDay;
             var moonriseTime = DateHelper.ParseDate(moonrise).TimeOfDay;
@@ -161,19 +170,19 @@ namespace FishingAdvisor
         private void BuildMoonSunPeakSets(TimeSpan sunrise, TimeSpan sunset, TimeSpan moonrise, TimeSpan moonset)
         {
 
-            dayTime = new ContinuousDimension("time", "Time of the day", "°C", -60, 24 * 60 - 1);
+            dayTime = new ContinuousDimension("time", "Time of the day", "t,m", -120, 24 * 60 - 1);
 
             int sunriseTime = (int)sunrise.TotalMinutes;
-            sunRise = new BellSet(dayTime, "Sunrise", sunriseTime, 30, 45);
+            sunRise = new BellSet(dayTime, "Sunrise", sunriseTime, 45, 120);
 
             int sunsetTime = (int)sunset.TotalMinutes;
-            sunSet = new BellSet(dayTime, "Sunset", sunsetTime, 30, 45);
+            sunSet = new BellSet(dayTime, "Sunset", sunsetTime, 45, 120);
 
             int moonriseTime = (int)moonrise.TotalMinutes;
-            moonRise = new BellSet(dayTime, "Moonrise", moonriseTime, 30, 45);
+            moonRise = new BellSet(dayTime, "Moonrise", moonriseTime, 45, 120);
 
             int moonsetTime = (int)moonset.TotalMinutes;
-            moonSet = new BellSet(dayTime, "Moonset", moonsetTime, 30, 45);
+            moonSet = new BellSet(dayTime, "Moonset", moonsetTime, 45, 120);
 
             #region Draw graphics
             DrawFuzzySetToPictureBox(sunRise, pictureBoxSunrise);
@@ -296,8 +305,9 @@ namespace FishingAdvisor
             PrependFullName(ref strExpression, "sunSet");
             PrependFullName(ref strExpression, "lowActivity");
             PrependFullName(ref strExpression, "highActivity");
+            PrependFullName(ref strExpression, "mediumActivity");
 
-            string eval = @"(((lowTemperature & risingTemperature) & highActivity)%
+            string sampleEval = @"(((lowTemperature & risingTemperature) & highActivity)%
                             ((goodTemperature & constantTemperature) & highActivity)%
                             ((goodTemperature & risingTemperature) & lowActivity)%
                             ((goodTemperature & fallingTemperature) & lowActivity)%
@@ -374,6 +384,33 @@ namespace FishingAdvisor
             ts.DrawImageOnNodeSelect = false;
             ts.BuildTree(treeViewRelation, pictureBoxGraph, lblGraphCaption);
 
+            #region restoring TreeView selection
+            if ((!_expressionChanged || initial) && selectedNodePath.Count() > 0 && selectedNodePath[selectedNodePath.Count() - 1] < treeViewRelation.Nodes.Count)
+            {
+                //We will now try to restore the selection
+                TreeNode pointer = treeViewRelation.Nodes[selectedNodePath[selectedNodePath.Count() - 1]];
+
+                for (int i = selectedNodePath.Count() - 2; i >= 0; i--)
+                {
+                    if (selectedNodePath[i] >= pointer.Nodes.Count)
+                    {
+                        pointer = null;
+                        break;
+                    }
+                    pointer = pointer.Nodes[selectedNodePath[i]];
+                }
+
+                if (pointer != null)
+                {
+                    treeViewRelation.SelectedNode = pointer;
+                    ts.DrawDetailImage(pointer);
+                }
+            }
+
+            Cursor.Current = Cursors.Default;
+            ts.DrawImageOnNodeSelect = true;
+            #endregion
+
             _building = false;
         }
 
@@ -402,6 +439,24 @@ namespace FishingAdvisor
                     _parentForm.Close();
                 }
             }
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            int minutes = trackBarTime.Value;
+            dayTimePicker.Value = DateTime.Now.Date.AddMinutes(minutes);
+            buildRelation();
+        }
+
+        private void dayTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            int timePickerMinutes = (int)dayTimePicker.Value.TimeOfDay.TotalMinutes;
+            if (trackBarTime.Value != timePickerMinutes)
+            {
+                trackBarTime.Value = timePickerMinutes;
+            }
+
+            buildRelation();
         }
 
     }
