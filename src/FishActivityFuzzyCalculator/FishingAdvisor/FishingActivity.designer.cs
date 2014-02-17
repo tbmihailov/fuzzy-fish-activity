@@ -742,12 +742,12 @@
             65536});
             this.txtDeltaTemp.Location = new System.Drawing.Point(225, 26);
             this.txtDeltaTemp.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
             this.txtDeltaTemp.Minimum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             -2147483648});
@@ -755,6 +755,11 @@
             this.txtDeltaTemp.Size = new System.Drawing.Size(98, 20);
             this.txtDeltaTemp.TabIndex = 3;
             this.txtDeltaTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDeltaTemp.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.txtDeltaTemp.ValueChanged += new System.EventHandler(this.inputControls_ValueChanged);
             // 
             // txtDeltaPressure
@@ -781,6 +786,11 @@
             this.txtDeltaPressure.Size = new System.Drawing.Size(98, 20);
             this.txtDeltaPressure.TabIndex = 3;
             this.txtDeltaPressure.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDeltaPressure.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             this.txtDeltaPressure.ValueChanged += new System.EventHandler(this.inputControls_ValueChanged);
             // 
             // label18

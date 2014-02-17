@@ -283,11 +283,13 @@ namespace FishingAdvisor
 
             bool _expressionChanged = false;
 
+            //вземаме входящите данни
             decimal inputTemperature = txtTemp.Value;
             decimal inputDeltaTemperature = txtDeltaTemp.Value;
             int inputDayTime = (int)dayTimePicker.Value.TimeOfDay.TotalMinutes;
             decimal inputDeltaPressurre = txtDeltaPressure.Value;
 
+            //Оценяваме релацията от потребителския интерфейс, като го компилираме до C# код
             #region Expression evaluation with C#
             string strExpression = txtExpression.Text;
             PrependFullName(ref strExpression, "lowTemperature");
@@ -307,13 +309,17 @@ namespace FishingAdvisor
             PrependFullName(ref strExpression, "highActivity");
             PrependFullName(ref strExpression, "mediumActivity");
 
-            string sampleEval = @"(((lowTemperature & risingTemperature) & highActivity)%
-                            ((goodTemperature & constantTemperature) & highActivity)%
-                            ((goodTemperature & risingTemperature) & lowActivity)%
-                            ((goodTemperature & fallingTemperature) & lowActivity)%
-                            (weatherGettingWorse & highActivity)%
-                            (weatherGettingBetter & highActivity))&((moonRise|moonSet|sunRise|sunSet)&highActivity)
-            ";
+            string sampleEval = @"((lowTemperature&risingTemperature)&highActivity)%
+((weatherGettingWorse)&highActivity)
+%((weatherGettingBetter)&highActivity)%
+((moonRise|moonSet|sunRise|sunSet)&highActivity)%
+
+((goodTemperature&risingTemperature)& lowActivity)%
+((goodTemperature&fallingTemperature)&lowActivity)%
+
+((goodTemperature&constantTemperature)&mediumActivity)%
+((!moonRise&!moonSet&!sunRise&!sunSet)&mediumActivity)
+";
 
             object obj = Evaluator.Eval(strExpression);
 
@@ -327,6 +333,7 @@ namespace FishingAdvisor
                 }
                 else
                 {
+                    //Вземаме резултата от оценяването
                     _relation = (FuzzyRelation)obj;
                     if (_expression != txtExpression.Text)
                         _expressionChanged = true;
@@ -336,6 +343,7 @@ namespace FishingAdvisor
             }
             #endregion
 
+            //Дефъзификация, чрез използване на Center of Gravity
             #region Defuzzification
             DefuzzificationFactory.DefuzzificationMethod method = DefuzzificationFactory.DefuzzificationMethod.CenterOfGravity;
             _defuzzification = DefuzzificationFactory.GetDefuzzification(

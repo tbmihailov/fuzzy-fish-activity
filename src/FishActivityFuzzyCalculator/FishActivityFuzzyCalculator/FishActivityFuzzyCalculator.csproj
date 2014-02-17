@@ -63,7 +63,9 @@
     <None Include="Res\Catches-2008-2013.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Res\Sozopol_Weather.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
